@@ -10,6 +10,14 @@
     margin-right: 25%;
 }
 
+.unavailable {
+    color: rgb(215,59,62);
+}
+
+.available {
+    color: green;
+}
+
 .room-details {
     text-align: center;
 }
@@ -27,16 +35,44 @@
     right: 1.5%;
 }
 
+.edit-button {
+    position: absolute;
+    right: 6%;
+    bottom: 50%;
+}
+
+.mat-delete {
+    background-color: rgb(215,59,62);
+}
+
 #add-room-form {
     padding: 10px;
     border: 1px;
     border-style: solid;
     background-color: white;
     position: absolute;
-    right: 15%;
+    right: 43%;
+    top: 17%;
 }
 
 .toolbar {
     text-align: center;
 }
+
+.deleting-room-info {
+    display: none;
+    padding: 25px;
+    border: 1px;
+    border-style: solid;
+    background-color: white;
+    position: absolute;
+    top: 30%;
+    left: 41%;
+}
+
+.cancel-button {
+    float: right;
+}
+
+
 

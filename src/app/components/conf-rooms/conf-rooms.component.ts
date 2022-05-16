@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ConferenceRoom } from 'src/app/models/conf-room';
 import { ConfRoomService } from 'src/app/services/conf-room.service';
 
@@ -10,6 +11,9 @@ import { ConfRoomService } from 'src/app/services/conf-room.service';
 export class ConfRoomsComponent implements OnInit {
 
   conferenceRooms : ConferenceRoom[] = [];
+
+  roomNameToDelete : string | null = 'null';
+  roomIdToDelete : number | null = null;
 
   constructor(private confRoomService: ConfRoomService | null) { }
 
@@ -51,7 +55,39 @@ export class ConfRoomsComponent implements OnInit {
     }
   }
 
-  public addRoom() {
-    console.log('Room added.');
+  public addRoom(form: NgForm) {
+    //TODO
+    console.log(JSON.stringify(form.value));
+    this.closeAddForm();
+  }
+
+  public openDeleteWindow(id : number, name: string) {
+    this.roomNameToDelete = name;
+    this.roomIdToDelete = id;
+
+    let delWindow = document.getElementById('delete-window');
+
+    if(delWindow != null) {
+      delWindow.style.display = 'block';
+    }
+
+  }
+
+  public closeDeleteWindow() {
+    this.roomNameToDelete = null;
+    this.roomIdToDelete = null;
+
+    let delWindow = document.getElementById('delete-window');
+
+    if (delWindow != null) {
+        delWindow.style.display = 'none';
+    }
+  }
+
+  public deleteRoom() {
+    // TODO
+    console.log(`Deleting room with id ${this.roomIdToDelete}`)
+
+    this.closeDeleteWindow();
   }
 }

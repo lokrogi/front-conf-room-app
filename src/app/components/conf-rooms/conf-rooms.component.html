@@ -2,9 +2,10 @@
     <h1 class="text">Organization name</h1>
 </div>
 <div class="toolbar">
-    <button mat-flat-button color="primary" class="add-room-button">Add conference room</button>
-    
+    <button mat-flat-button color="primary" class="add-room-button" (click)="openAddForm()">Add conference room</button>    
 </div>
+
+<hr>
 
 <div *ngFor="let room of conferenceRooms; let i = index">
 
@@ -17,16 +18,17 @@
                 {{room.name}} 
             </mat-panel-description>
             <div class="availability">
-                <mat-icon *ngIf="room.available; else unavailable">check</mat-icon>
+                <mat-icon *ngIf="room.available; else unavailable" class="available">check</mat-icon>
                 <ng-template #unavailable>
-                    <mat-icon >cancel</mat-icon>
+                    <mat-icon class="unavailable">cancel</mat-icon>
                 </ng-template>
             </div>
           </mat-expansion-panel-header>
           <hr>
 
+        <button mat-raised-button color="primary" class="edit-button">Edit</button>
         <div class="delete-button">
-            <button mat-fab color="primary">
+            <button mat-fab color="delete" (click)="openDeleteWindow(room.id , room.name)">
               <mat-icon>delete</mat-icon>
             </button>
         </div>
@@ -37,41 +39,53 @@
             <p>Standing places: {{room.standingPlaces}}</p>
         </div>
 
-        <button *ngIf="room.available" mat-raised-button color="primary" class="book-button">Book</button>
+        <button *ngIf="room.available" mat-raised-button class="book-button">Book this room</button>
+        
     </mat-expansion-panel>
 
 </div>
 
+
+
 <div id="add-room-form">
-    <button mat-icon-button class="close-button">
+    <button mat-icon-button class="close-button" (click)="closeAddForm()">
         <mat-icon>close</mat-icon>
     </button>
-    <form>
+    <form #addForm="ngForm" (ngSubmit)="addRoom(addForm)">
         <mat-form-field class="form-item" appearance="fill">
           <mat-label>Room name</mat-label>
-          <input matInput >
+          <input matInput  type="text" id="name" ngModel name="name">
         </mat-form-field>
         <br>
         <mat-form-field appearance="fill">
             <mat-label>Level</mat-label>
-            <input matInput>
+            <input matInput  type="text" id="level" ngModel name="level" >
         </mat-form-field>
         <br>
         <mat-form-field appearance="fill">
             <mat-label>Sitting places</mat-label>
-            <input matInput>
+            <input matInput  type="text" id="sittingPlaces" ngModel name="sittingPlaces">
         </mat-form-field>
         <br>
         <mat-form-field appearance="fill">
           <mat-label>Standing places</mat-label>
-          <input matInput>
+          <input matInput  type="text" id="standingPlaces" ngModel name="standingPlaces">
       </mat-form-field>
       <br>
       <button mat-raised-button color="primary" type="submit">Add</button>
     </form>
-    
+</div>
+
+<div id="delete-window" class="deleting-room-info">
+    <p>Do you want to delete room <b>{{roomNameToDelete}}</b>?</p>
+    <button mat-raised-button color="primary" class="del-button" (click)="deleteRoom()">Delete</button>
+    <button mat-raised-button color="primary" class="cancel-button" (click)="closeDeleteWindow()">Cancel</button>
 
 </div>
+
+
+
+
 
 
 
