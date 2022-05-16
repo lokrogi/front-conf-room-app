@@ -24,10 +24,10 @@ export class ConfRoomsComponent implements OnInit {
       addForm.style.display = 'none';
     }
 
-    this.getAllCars();
+    this.getAllRooms();
   }
 
-  public getAllCars(): void {
+  public getAllRooms(): void {
     this.confRoomService?.getAllRooms().subscribe(
       data => {
         this.conferenceRooms = data;
@@ -49,5 +49,9 @@ export class ConfRoomsComponent implements OnInit {
     if(addForm != null) {
       addForm.style.display = 'block';
     }
+  }
+
+  public addRoom() {
+    console.log('Room added.');
   }
 }

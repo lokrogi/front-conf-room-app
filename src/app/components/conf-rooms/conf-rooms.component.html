@@ -1,18 +1,35 @@
-<div *ngFor="let room of conferenceRooms">
+<div class="header-div">
+    <h1 class="text">Organization name</h1>
+</div>
+<div class="toolbar">
+    <button mat-flat-button color="primary" class="add-room-button">Add conference room</button>
+    
+</div>
 
-    <mat-expansion-panel class="room-content">
+<div *ngFor="let room of conferenceRooms; let i = index">
+
+    <mat-expansion-panel class="room-content" >
           <mat-expansion-panel-header>
             <mat-panel-title>
-                {{room.organizationDto.name}}
+                {{i + 1}}
             </mat-panel-title>
             <mat-panel-description class="room-name">
                 {{room.name}} 
             </mat-panel-description>
             <div class="availability">
-                {{room.available}}
+                <mat-icon *ngIf="room.available; else unavailable">check</mat-icon>
+                <ng-template #unavailable>
+                    <mat-icon >cancel</mat-icon>
+                </ng-template>
             </div>
           </mat-expansion-panel-header>
           <hr>
+
+        <div class="delete-button">
+            <button mat-fab color="primary">
+              <mat-icon>delete</mat-icon>
+            </button>
+        </div>
 
         <div class="room-details">
             <p>Level: {{room.level}}</p>
@@ -20,16 +37,16 @@
             <p>Standing places: {{room.standingPlaces}}</p>
         </div>
 
-          <button mat-raised-button class="book-button">Book</button>
+        <button *ngIf="room.available" mat-raised-button color="primary" class="book-button">Book</button>
     </mat-expansion-panel>
 
 </div>
 
 <div id="add-room-form">
-    <button mat-icon-button class="close-button" (click)="closeAddForm()">
+    <button mat-icon-button class="close-button">
         <mat-icon>close</mat-icon>
     </button>
-    <form >
+    <form>
         <mat-form-field class="form-item" appearance="fill">
           <mat-label>Room name</mat-label>
           <input matInput >
@@ -50,8 +67,9 @@
           <input matInput>
       </mat-form-field>
       <br>
-        <button mat-raised-button color="primary">Add</button>
+      <button mat-raised-button color="primary" type="submit">Add</button>
     </form>
+    
 
 </div>
 
