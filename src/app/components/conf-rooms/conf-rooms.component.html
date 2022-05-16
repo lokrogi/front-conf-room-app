@@ -1,4 +1,3 @@
-
 <div *ngFor="let room of conferenceRooms">
 
     <mat-expansion-panel class="room-content">
@@ -23,6 +22,36 @@
 
           <button mat-raised-button class="book-button">Book</button>
     </mat-expansion-panel>
+
+</div>
+
+<div id="add-room-form">
+    <button mat-icon-button class="close-button" (click)="closeAddForm()">
+        <mat-icon>close</mat-icon>
+    </button>
+    <form >
+        <mat-form-field class="form-item" appearance="fill">
+          <mat-label>Room name</mat-label>
+          <input matInput >
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Level</mat-label>
+            <input matInput>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Sitting places</mat-label>
+            <input matInput>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+          <mat-label>Standing places</mat-label>
+          <input matInput>
+      </mat-form-field>
+      <br>
+        <button mat-raised-button color="primary">Add</button>
+    </form>
 
 </div>
 

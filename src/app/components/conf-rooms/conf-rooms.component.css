@@ -18,3 +18,16 @@
     float: right;
 }
 
+.close-button {
+    float: right;
+}
+
+#add-room-form {
+    padding: 10px;
+    border: 1px;
+    border-style: solid;
+    background-color: white;
+    position: absolute;
+    right: 15%;
+}
+
