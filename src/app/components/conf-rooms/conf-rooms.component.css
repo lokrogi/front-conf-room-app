@@ -10,6 +10,14 @@
     margin-right: 25%;
 }
 
+.unavailable {
+    color: rgb(215,59,62);
+}
+
+.available {
+    color: green;
+}
+
 .room-details {
     text-align: center;
 }
@@ -25,6 +33,16 @@
 .delete-button {
     position: absolute;
     right: 1.5%;
+}
+
+.edit-button {
+    position: absolute;
+    right: 6%;
+    bottom: 50%;
+}
+
+.mat-delete {
+    background-color: rgb(215,59,62);
 }
 
 #add-room-form {
@@ -55,4 +73,6 @@
 .cancel-button {
     float: right;
 }
+
+
 

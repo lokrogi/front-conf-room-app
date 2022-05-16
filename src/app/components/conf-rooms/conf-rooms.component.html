@@ -18,16 +18,17 @@
                 {{room.name}} 
             </mat-panel-description>
             <div class="availability">
-                <mat-icon *ngIf="room.available; else unavailable">check</mat-icon>
+                <mat-icon *ngIf="room.available; else unavailable" class="available">check</mat-icon>
                 <ng-template #unavailable>
-                    <mat-icon >cancel</mat-icon>
+                    <mat-icon class="unavailable">cancel</mat-icon>
                 </ng-template>
             </div>
           </mat-expansion-panel-header>
           <hr>
 
+        <button mat-raised-button color="primary" class="edit-button">Edit</button>
         <div class="delete-button">
-            <button mat-fab color="primary" (click)="openDeleteWindow(room.id , room.name)">
+            <button mat-fab color="delete" (click)="openDeleteWindow(room.id , room.name)">
               <mat-icon>delete</mat-icon>
             </button>
         </div>
@@ -38,7 +39,8 @@
             <p>Standing places: {{room.standingPlaces}}</p>
         </div>
 
-        <button *ngIf="room.available" mat-raised-button color="primary" class="book-button">Book</button>
+        <button *ngIf="room.available" mat-raised-button class="book-button">Book this room</button>
+        
     </mat-expansion-panel>
 
 </div>
