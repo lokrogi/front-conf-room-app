@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ConferenceRoom } from 'src/app/models/conf-room';
 import { ConfRoomService } from 'src/app/services/conf-room.service';
 
@@ -51,7 +52,8 @@ export class ConfRoomsComponent implements OnInit {
     }
   }
 
-  public addRoom() {
-    console.log('Room added.');
+  public addRoom(form: NgForm) {
+    //TODO
+    console.log(JSON.stringify(form.value));
   }
 }

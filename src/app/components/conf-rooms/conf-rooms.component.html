@@ -2,9 +2,13 @@
     <h1 class="text">Organization name</h1>
 </div>
 <div class="toolbar">
-    <button mat-flat-button color="primary" class="add-room-button">Add conference room</button>
+    <button mat-flat-button color="primary" class="add-room-button" (click)="openAddForm()">Add conference room</button>
     
 </div>
+
+
+
+
 
 <div *ngFor="let room of conferenceRooms; let i = index">
 
@@ -42,36 +46,40 @@
 
 </div>
 
+
+
 <div id="add-room-form">
-    <button mat-icon-button class="close-button">
+    <button mat-icon-button class="close-button" (click)="closeAddForm()">
         <mat-icon>close</mat-icon>
     </button>
-    <form>
+    <form #addForm="ngForm" (ngSubmit)="addRoom(addForm)">
         <mat-form-field class="form-item" appearance="fill">
           <mat-label>Room name</mat-label>
-          <input matInput >
+          <input matInput  type="text" id="name" ngModel name="name">
         </mat-form-field>
         <br>
         <mat-form-field appearance="fill">
             <mat-label>Level</mat-label>
-            <input matInput>
+            <input matInput  type="text" id="level" ngModel name="level" >
         </mat-form-field>
         <br>
         <mat-form-field appearance="fill">
             <mat-label>Sitting places</mat-label>
-            <input matInput>
+            <input matInput  type="text" id="sittingPlaces" ngModel name="sittingPlaces">
         </mat-form-field>
         <br>
         <mat-form-field appearance="fill">
           <mat-label>Standing places</mat-label>
-          <input matInput>
+          <input matInput  type="text" id="standingPlaces" ngModel name="standingPlaces">
       </mat-form-field>
       <br>
       <button mat-raised-button color="primary" type="submit">Add</button>
     </form>
-    
-
 </div>
+
+
+
+
 
 
 

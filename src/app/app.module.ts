@@ -16,6 +16,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input'; 
 import {MatExpansionModule} from '@angular/material/expansion'; 
 import {MatMenuModule} from '@angular/material/menu'; 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -35,6 +36,8 @@ import {MatMenuModule} from '@angular/material/menu';
     MatInputModule,
     MatExpansionModule,
     MatMenuModule,
+    FormsModule,
+    ReactiveFormsModule
     
   ],
   providers: [],
