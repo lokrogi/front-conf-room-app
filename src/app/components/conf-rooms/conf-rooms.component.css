@@ -18,3 +18,25 @@
     float: right;
 }
 
+.close-button {
+    float: right;
+}
+
+.delete-button {
+    position: absolute;
+    right: 1.5%;
+}
+
+#add-room-form {
+    padding: 10px;
+    border: 1px;
+    border-style: solid;
+    background-color: white;
+    position: absolute;
+    right: 15%;
+}
+
+.toolbar {
+    text-align: center;
+}
+

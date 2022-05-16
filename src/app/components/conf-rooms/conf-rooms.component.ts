@@ -11,17 +11,47 @@ export class ConfRoomsComponent implements OnInit {
 
   conferenceRooms : ConferenceRoom[] = [];
 
-  constructor(private confRoomService: ConfRoomService) { }
+  constructor(private confRoomService: ConfRoomService | null) { }
 
   ngOnInit(): void {
-    this.getAllCars();
+    this.init();
   }
 
-  public getAllCars(): void {
-    this.confRoomService.getAllRooms().subscribe(
+  public init(): void {
+    const addForm = document.getElementById('add-room-form');
+
+    if(addForm != null) {
+      addForm.style.display = 'none';
+    }
+
+    this.getAllRooms();
+  }
+
+  public getAllRooms(): void {
+    this.confRoomService?.getAllRooms().subscribe(
       data => {
         this.conferenceRooms = data;
       }
     );
+  }
+
+  public closeAddForm(): void {
+    const addForm = document.getElementById('add-room-form');
+
+    if(addForm != null) {
+      addForm.style.display = 'none';
+    }
+  }
+
+  public openAddForm(): void {
+    const addForm = document.getElementById('add-room-form');
+
+    if(addForm != null) {
+      addForm.style.display = 'block';
+    }
+  }
+
+  public addRoom() {
+    console.log('Room added.');
   }
 }
