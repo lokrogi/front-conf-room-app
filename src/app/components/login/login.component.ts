@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.initLogingPage();
@@ -42,6 +44,18 @@ export class LoginComponent implements OnInit {
     if(loginDiv != null) {
       loginDiv.style.display = 'none';
     }
+  }
+
+  public login(form: NgForm) {
+    //TODO
+    console.log(JSON.stringify(form.value))
+    this.router.navigateByUrl('/rooms');
+  }
+
+  public signUp(form: NgForm) {
+    //TODO
+    console.log(JSON.stringify(form.value))
+    this.router.navigateByUrl('/rooms');
   }
 
 }

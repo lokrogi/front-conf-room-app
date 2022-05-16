@@ -55,5 +55,6 @@ export class ConfRoomsComponent implements OnInit {
   public addRoom(form: NgForm) {
     //TODO
     console.log(JSON.stringify(form.value));
+    this.closeAddForm();
   }
 }
