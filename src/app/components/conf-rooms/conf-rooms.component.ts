@@ -12,6 +12,9 @@ export class ConfRoomsComponent implements OnInit {
 
   conferenceRooms : ConferenceRoom[] = [];
 
+  roomNameToDelete : string | null = 'null';
+  roomIdToDelete : number | null = null;
+
   constructor(private confRoomService: ConfRoomService | null) { }
 
   ngOnInit(): void {
@@ -56,5 +59,35 @@ export class ConfRoomsComponent implements OnInit {
     //TODO
     console.log(JSON.stringify(form.value));
     this.closeAddForm();
+  }
+
+  public openDeleteWindow(id : number, name: string) {
+    this.roomNameToDelete = name;
+    this.roomIdToDelete = id;
+
+    let delWindow = document.getElementById('delete-window');
+
+    if(delWindow != null) {
+      delWindow.style.display = 'block';
+    }
+
+  }
+
+  public closeDeleteWindow() {
+    this.roomNameToDelete = null;
+    this.roomIdToDelete = null;
+
+    let delWindow = document.getElementById('delete-window');
+
+    if (delWindow != null) {
+        delWindow.style.display = 'none';
+    }
+  }
+
+  public deleteRoom() {
+    // TODO
+    console.log(`Deleting room with id ${this.roomIdToDelete}`)
+
+    this.closeDeleteWindow();
   }
 }

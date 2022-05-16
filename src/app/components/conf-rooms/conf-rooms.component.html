@@ -27,7 +27,7 @@
           <hr>
 
         <div class="delete-button">
-            <button mat-fab color="primary">
+            <button mat-fab color="primary" (click)="openDeleteWindow(room.id , room.name)">
               <mat-icon>delete</mat-icon>
             </button>
         </div>
@@ -72,6 +72,13 @@
       <br>
       <button mat-raised-button color="primary" type="submit">Add</button>
     </form>
+</div>
+
+<div id="delete-window" class="deleting-room-info">
+    <p>Do you want to delete room <b>{{roomNameToDelete}}</b>?</p>
+    <button mat-raised-button color="primary" class="del-button" (click)="deleteRoom()">Delete</button>
+    <button mat-raised-button color="primary" class="cancel-button" (click)="closeDeleteWindow()">Cancel</button>
+
 </div>
 
 
