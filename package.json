@@ -1,5 +1,5 @@
 {
-  "name": "front-conf-room-app",
+  "name": "conference-room-reservation",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

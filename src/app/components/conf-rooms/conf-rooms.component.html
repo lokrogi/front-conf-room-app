@@ -1,0 +1,33 @@
+
+<div *ngFor="let room of conferenceRooms">
+
+    <mat-expansion-panel class="room-content">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{room.organizationDto.name}}
+            </mat-panel-title>
+            <mat-panel-description class="room-name">
+                {{room.name}} 
+            </mat-panel-description>
+            <div class="availability">
+                {{room.available}}
+            </div>
+          </mat-expansion-panel-header>
+          <hr>
+
+        <div class="room-details">
+            <p>Level: {{room.level}}</p>
+            <p>Sitting places: {{room.sittingPlaces}}</p>
+            <p>Standing places: {{room.standingPlaces}}</p>
+        </div>
+
+          <button mat-raised-button class="book-button">Book</button>
+    </mat-expansion-panel>
+
+</div>
+
+
+
+  
+  
+

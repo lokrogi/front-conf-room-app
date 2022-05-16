@@ -1,1 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    
+}
+
+.org-menu {
+    position: absolute;
+    right: 15px;
+}
+
+.welcome {
+    text-align: center;
+    color: white;
+}
+
+.header-div {
+    background-color: rgb(73, 73, 189);
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.footer-div {
+    background-color: rgb(73, 73, 189);
+    padding-top: 5px;
+    padding-bottom: 5px;
+}

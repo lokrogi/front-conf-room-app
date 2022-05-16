@@ -1,0 +1,20 @@
+.room-content {
+    margin: 5px;
+}
+
+.room-name {
+    color: black;
+}
+
+.availability {
+    margin-right: 25%;
+}
+
+.room-details {
+    text-align: center;
+}
+
+.book-button {
+    float: right;
+}
+
