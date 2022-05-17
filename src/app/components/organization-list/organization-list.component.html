@@ -1,0 +1,32 @@
+<div class="header-div">
+    <h1 class="text">Conference room reservation app</h1>
+</div>
+<hr>
+
+<h3 class="choose">Choose organization</h3>
+
+
+<div  class="table-div">
+    <table id="organizations">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th></th>
+        </tr>
+        <tr *ngFor="let organization of organizations">
+            <td class="column">{{organization.id}}</td>
+            <td class="column">{{organization.name}}</td>
+            <td class="column">
+                <button mat-button color="primary" (click)="assignChosenOrganization(organization)">Choose</button>
+            </td>
+        </tr>
+        
+        
+      </table>
+    
+</div>
+
+
+  
+  
+  

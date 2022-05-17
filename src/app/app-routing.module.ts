@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ConfRoomsComponent } from './components/conf-rooms/conf-rooms.component';
-import { LoginComponent } from './components/login/login.component';
+import { OrganizationListComponent } from './components/organization-list/organization-list.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
-  { path: 'rooms', component: ConfRoomsComponent }
+  { path: '', component: OrganizationListComponent },
+  { path: 'rooms', component: ConfRoomsComponent },
+  { path: '**', redirectTo: ''}
 ];
 
 @NgModule({

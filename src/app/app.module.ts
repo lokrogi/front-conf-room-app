@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { ConfRoomsComponent } from './components/conf-rooms/conf-rooms.component';
-import { LoginComponent } from './components/login/login.component';
+import { OrganizationListComponent } from './components/organization-list/organization-list.component';
 import { HttpClientModule } from '@angular/common/http';
 
 import { MatButtonModule } from '@angular/material/button'
@@ -17,13 +17,15 @@ import {MatInputModule} from '@angular/material/input';
 import {MatExpansionModule} from '@angular/material/expansion'; 
 import {MatMenuModule} from '@angular/material/menu'; 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatDividerModule} from '@angular/material/divider'; 
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ConfRoomsComponent,
-    LoginComponent
+    OrganizationListComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +39,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatExpansionModule,
     MatMenuModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDividerModule
     
   ],
   providers: [],

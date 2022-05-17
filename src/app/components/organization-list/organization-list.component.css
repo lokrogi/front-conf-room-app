@@ -1,0 +1,33 @@
+.choose {
+    text-align: center;
+    font-size: 25px;
+}
+
+.table-div {
+    display: grid;
+    margin-bottom: 2%;
+}
+
+#organizations th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: rgb(73, 73, 189);
+    color: white;
+}
+
+#organizations td, #organizations th {
+    border: 1px solid rgb(0, 0, 0);
+    padding: 8px;
+}
+
+#organizations tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+.column {
+    text-align: center;
+}
+
+
+

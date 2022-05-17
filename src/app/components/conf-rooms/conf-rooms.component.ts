@@ -1,9 +1,12 @@
 import { getLocaleDateFormat } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ConferenceRoom } from 'src/app/models/conf-room';
 import { DateForBooking } from 'src/app/models/dateForBooking';
+import { Organization } from 'src/app/models/organization';
 import { ConfRoomService } from 'src/app/services/conf-room.service';
+import { SharedService } from 'src/app/shared/shared.service';
 
 @Component({
   selector: 'app-conf-rooms',
@@ -25,12 +28,21 @@ export class ConfRoomsComponent implements OnInit {
 
   roomToEdit: ConferenceRoom | null = null;
 
-  
+  chosenOrganization: Organization | undefined;
 
-  constructor(private confRoomService: ConfRoomService) { }
+  constructor(private confRoomService: ConfRoomService, private sharedService : SharedService, private router: Router) { }
 
   ngOnInit(): void {
+    this.chosenOrganization = this.sharedService.getOrganization();
+    this.redirectIfOrganizationUndefined();
     this.init();
+  }
+
+  public redirectIfOrganizationUndefined() {
+    if(!this.chosenOrganization) {
+      this.router.navigate([''])
+    }
+    
   }
 
   public init(): void {
