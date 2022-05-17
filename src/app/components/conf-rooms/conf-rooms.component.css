@@ -38,11 +38,12 @@
 .edit-button {
     position: absolute;
     right: 6%;
-    bottom: 50%;
+    top: 37%
 }
 
 .mat-delete {
     background-color: rgb(215,59,62);
+    color: white;
 }
 
 #add-room-form {
@@ -74,5 +75,27 @@
     float: right;
 }
 
+.date-div {
+    border: 1px;
+    border-style: solid;
+    display: none;
+    position: absolute;
+    background-color: white;
+    padding: 25px;
+    top: 15%;
+    right: 25%;
+}
+
+.date-label {
+    font-size: 13px;
+}
+
+.choose-date {
+    text-align: center;
+}
+
+.date-info {
+    text-align: center;
+}
 
 
