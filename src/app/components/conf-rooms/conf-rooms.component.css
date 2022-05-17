@@ -98,4 +98,17 @@
     text-align: center;
 }
 
+#edit-form {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px;
+    border-style: solid;
+    top: 30%;
+    left: 30%;
+    padding: 25px;
+}
+
+
+
 

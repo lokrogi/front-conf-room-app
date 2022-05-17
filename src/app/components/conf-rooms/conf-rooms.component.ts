@@ -23,6 +23,8 @@ export class ConfRoomsComponent implements OnInit {
   startDateToDisplay: string | null = null;
   endDateToDisplay: string | null = null;
 
+  roomToEdit: ConferenceRoom | null = null;
+
   
 
   constructor(private confRoomService: ConfRoomService) { }
@@ -132,6 +134,36 @@ export class ConfRoomsComponent implements OnInit {
 
     //TODO
     console.log(`start: ${this.startDate}, end: ${this.endDate}`);
+  }
+
+  public openEditForm(room : ConferenceRoom) {
+    this.roomToEdit = room;
+
+    let editForm = document.getElementById('edit-form')
+
+    console.log(room.name)
+
+    if (editForm != null) {
+      editForm.style.display = 'block';
+    }
+  }
+
+  public closeEditForm() {
+    this.roomToEdit = null;
+
+    let editForm = document.getElementById('edit-form')
+
+    if (editForm != null) {
+      editForm.style.display = 'none';
+    }
+  }
+
+  public editRoom(id: number | undefined, form : NgForm) {
+    let room = form.value as ConferenceRoom;
+
+    //TODO
+    
+    console.log(room)
   }
 
 

@@ -29,7 +29,7 @@
           </mat-expansion-panel-header>
           <hr>
 
-        <button mat-raised-button color="primary" class="edit-button">Edit</button>
+        <button mat-raised-button color="primary" class="edit-button" (click)="openEditForm(room)">Edit</button>
         <div class="delete-button">
             <button mat-fab color="delete" (click)="openDeleteModal(room.id , room.name)">
               <mat-icon>delete</mat-icon>
@@ -42,7 +42,9 @@
             <p>Standing places: {{room.standingPlaces}}</p>
         </div>
 
-        <button *ngIf="room.available" mat-raised-button class="book-button">Book this room</button>
+        <div *ngIf="startDateToDisplay != null">
+            <button *ngIf="room.available" mat-raised-button class="book-button">Book this room</button>
+        </div>
         
     </mat-expansion-panel>
 
@@ -103,6 +105,35 @@
         <mat-form-field>
             <label class="date-label">End time</label>
             <input matInput type="time" id="endTime" ngModel name="endTime">
+        </mat-form-field>
+        <br>
+        <button mat-raised-button color="primary" type="submit">Accept</button>
+    </form>
+</div>
+
+<div id="edit-form">
+    <button mat-icon-button class="close-button" (click)="closeEditForm()">
+        <mat-icon>close</mat-icon>
+    </button>
+    <form #editForm="ngForm" (ngSubmit)="editRoom(roomToEdit?.id , editForm)">
+        <mat-form-field class="form-item" appearance="fill">
+            <mat-label>Room name ({{roomToEdit?.name}})</mat-label>
+            <input matInput  type="text" id="name" ngModel name="name" >
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
+              <mat-label>Level ({{roomToEdit?.level}})</mat-label>
+              <input matInput  type="number" id="level" ngModel name="level" >
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
+              <mat-label>Sitting places ({{roomToEdit?.sittingPlaces}})</mat-label>
+              <input matInput  type="number" id="sittingPlaces" ngModel name="sittingPlaces">
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
+            <mat-label>Standing places ({{roomToEdit?.standingPlaces}})</mat-label>
+            <input matInput  type="number" id="standingPlaces" ngModel name="standingPlaces">
         </mat-form-field>
         <br>
         <button mat-raised-button color="primary" type="submit">Accept</button>
