@@ -27,5 +27,9 @@ export class ConferenceRoom {
     this.standingPlaces = standingPlaces
     this.organizationDto = organizationDto
   }
+
+  public setId(id : number) {
+    this.id = id;
+  }
     
 }

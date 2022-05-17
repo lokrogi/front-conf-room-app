@@ -2,10 +2,13 @@
     <h1 class="text">Organization name</h1>
 </div>
 <div class="toolbar">
-    <button mat-flat-button color="primary" class="add-room-button" (click)="openAddForm()">Add conference room</button>    
+    <button mat-flat-button color="primary"  (click)="openAddForm()">Add conference room</button>    
+    <button mat-flat-button color="primary" (click)="openDateForm()">Choose date</button>
 </div>
 
 <hr>
+<h3 *ngIf="startDateToDisplay != null" class="date-info">Conference rooms for date: from {{startDateToDisplay}} to {{endDateToDisplay}}</h3>
+<h3 class="date-info" *ngIf="startDateToDisplay == null">All rooms</h3>
 
 <div *ngFor="let room of conferenceRooms; let i = index">
 
@@ -17,7 +20,7 @@
             <mat-panel-description class="room-name">
                 {{room.name}} 
             </mat-panel-description>
-            <div class="availability">
+            <div class="availability" *ngIf="startDateToDisplay != null">
                 <mat-icon *ngIf="room.available; else unavailable" class="available">check</mat-icon>
                 <ng-template #unavailable>
                     <mat-icon class="unavailable">cancel</mat-icon>
@@ -26,9 +29,9 @@
           </mat-expansion-panel-header>
           <hr>
 
-        <button mat-raised-button color="primary" class="edit-button">Edit</button>
+        <button mat-raised-button color="primary" class="edit-button" (click)="openEditForm(room)">Edit</button>
         <div class="delete-button">
-            <button mat-fab color="delete" (click)="openDeleteWindow(room.id , room.name)">
+            <button mat-fab color="delete" (click)="openDeleteModal(room.id , room.name)">
               <mat-icon>delete</mat-icon>
             </button>
         </div>
@@ -39,7 +42,9 @@
             <p>Standing places: {{room.standingPlaces}}</p>
         </div>
 
-        <button *ngIf="room.available" mat-raised-button class="book-button">Book this room</button>
+        <div *ngIf="startDateToDisplay != null">
+            <button *ngIf="room.available" mat-raised-button class="book-button">Book this room</button>
+        </div>
         
     </mat-expansion-panel>
 
@@ -59,17 +64,17 @@
         <br>
         <mat-form-field appearance="fill">
             <mat-label>Level</mat-label>
-            <input matInput  type="text" id="level" ngModel name="level" >
+            <input matInput  type="number" id="level" ngModel name="level" >
         </mat-form-field>
         <br>
         <mat-form-field appearance="fill">
             <mat-label>Sitting places</mat-label>
-            <input matInput  type="text" id="sittingPlaces" ngModel name="sittingPlaces">
+            <input matInput  type="number" id="sittingPlaces" ngModel name="sittingPlaces">
         </mat-form-field>
         <br>
         <mat-form-field appearance="fill">
           <mat-label>Standing places</mat-label>
-          <input matInput  type="text" id="standingPlaces" ngModel name="standingPlaces">
+          <input matInput  type="number" id="standingPlaces" ngModel name="standingPlaces">
       </mat-form-field>
       <br>
       <button mat-raised-button color="primary" type="submit">Add</button>
@@ -79,8 +84,60 @@
 <div id="delete-window" class="deleting-room-info">
     <p>Do you want to delete room <b>{{roomNameToDelete}}</b>?</p>
     <button mat-raised-button color="primary" class="del-button" (click)="deleteRoom()">Delete</button>
-    <button mat-raised-button color="primary" class="cancel-button" (click)="closeDeleteWindow()">Cancel</button>
+    <button mat-raised-button color="primary" class="cancel-button" (click)="closeDeleteModal()">Cancel</button>
+</div>
 
+<div class="date-div" id="date-div">
+    <button mat-icon-button class="close-button" (click)="closeDateForm()">
+        <mat-icon>close</mat-icon>
+    </button>
+    <form #dateForm="ngForm" (ngSubmit)="getRoomsForDate(dateForm)">
+        <mat-form-field>
+            <label class="date-label">Date</label>
+            <input matInput type="date" id="date" ngModel name="date">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <label class="date-label">Start time</label>
+            <input matInput type="time" id="startTime" ngModel name="startTime">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <label class="date-label">End time</label>
+            <input matInput type="time" id="endTime" ngModel name="endTime">
+        </mat-form-field>
+        <br>
+        <button mat-raised-button color="primary" type="submit">Accept</button>
+    </form>
+</div>
+
+<div id="edit-form">
+    <button mat-icon-button class="close-button" (click)="closeEditForm()">
+        <mat-icon>close</mat-icon>
+    </button>
+    <form #editForm="ngForm" (ngSubmit)="editRoom(roomToEdit?.id , editForm)">
+        <mat-form-field class="form-item" appearance="fill">
+            <mat-label>Room name ({{roomToEdit?.name}})</mat-label>
+            <input matInput  type="text" id="name" ngModel name="name" >
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
+              <mat-label>Level ({{roomToEdit?.level}})</mat-label>
+              <input matInput  type="number" id="level" ngModel name="level" >
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
+              <mat-label>Sitting places ({{roomToEdit?.sittingPlaces}})</mat-label>
+              <input matInput  type="number" id="sittingPlaces" ngModel name="sittingPlaces">
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
+            <mat-label>Standing places ({{roomToEdit?.standingPlaces}})</mat-label>
+            <input matInput  type="number" id="standingPlaces" ngModel name="standingPlaces">
+        </mat-form-field>
+        <br>
+        <button mat-raised-button color="primary" type="submit">Accept</button>
+    </form>
 </div>
 
 
