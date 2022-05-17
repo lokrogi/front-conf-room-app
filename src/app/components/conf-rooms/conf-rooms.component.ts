@@ -37,6 +37,8 @@ export class ConfRoomsComponent implements OnInit {
     if(addForm != null) {
       addForm.style.display = 'none';
     }
+
+    this.getAllRooms();
   }
 
   public getAllRooms(): void {

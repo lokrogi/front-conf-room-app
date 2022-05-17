@@ -3,15 +3,12 @@
 </div>
 <div class="toolbar">
     <button mat-flat-button color="primary"  (click)="openAddForm()">Add conference room</button>    
-    <button mat-flat-button color="primary" (click)="openDateForm()" *ngIf="startDateToDisplay != null">Choose date</button>
+    <button mat-flat-button color="primary" (click)="openDateForm()">Choose date</button>
 </div>
 
 <hr>
 <h3 *ngIf="startDateToDisplay != null" class="date-info">Conference rooms for date: from {{startDateToDisplay}} to {{endDateToDisplay}}</h3>
-
-<div class="choose-date" *ngIf="startDateToDisplay == null">
-    <button mat-flat-button color="primary" (click)="openDateForm()">Choose date</button>
-</div>
+<h3 class="date-info" *ngIf="startDateToDisplay == null">All rooms</h3>
 
 <div *ngFor="let room of conferenceRooms; let i = index">
 
@@ -23,7 +20,7 @@
             <mat-panel-description class="room-name">
                 {{room.name}} 
             </mat-panel-description>
-            <div class="availability">
+            <div class="availability" *ngIf="startDateToDisplay != null">
                 <mat-icon *ngIf="room.available; else unavailable" class="available">check</mat-icon>
                 <ng-template #unavailable>
                     <mat-icon class="unavailable">cancel</mat-icon>
