@@ -47,6 +47,7 @@
 }
 
 #add-room-form {
+    display: none;
     padding: 10px;
     border: 1px;
     border-style: solid;

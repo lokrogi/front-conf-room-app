@@ -1,11 +1,12 @@
 import { getLocaleDateFormat } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConferenceRoom } from 'src/app/models/conf-room';
 import { DateForBooking } from 'src/app/models/dateForBooking';
 import { Organization } from 'src/app/models/organization';
-import { RoomsRequest } from 'src/app/models/room-request';
+import { RoomsRequest } from 'src/app/models/time-peroid-request';
 import { ConfRoomService } from 'src/app/services/conf-room.service';
 import { SharedService } from 'src/app/shared/shared.service';
 
@@ -15,12 +16,9 @@ import { SharedService } from 'src/app/shared/shared.service';
   styleUrls: ['./conf-rooms.component.css']
 })
 export class ConfRoomsComponent implements OnInit {
-
   conferenceRooms : ConferenceRoom[] = [];
 
-  roomNameToDelete : string | null = null;
-  roomIdToDelete : number | null = null;
-
+  roomToDelete: ConferenceRoom | null = null;
   
   startDate: string | null = null;
   endDate: string | null = null;
@@ -36,24 +34,13 @@ export class ConfRoomsComponent implements OnInit {
   ngOnInit(): void {
     this.chosenOrganization = this.sharedService.getOrganization();
     this.redirectIfOrganizationUndefined();
-    this.init();
+    this.getAllRooms();
   }
 
   public redirectIfOrganizationUndefined() {
     if(!this.chosenOrganization) {
       this.router.navigate([''])
     }
-    
-  }
-
-  public init(): void {
-    const addForm = document.getElementById('add-room-form');
-
-    if(addForm != null) {
-      addForm.style.display = 'none';
-    }
-
-    this.getAllRooms();
   }
 
   public getAllRooms(): void {
@@ -81,14 +68,20 @@ export class ConfRoomsComponent implements OnInit {
   }
 
   public addRoom(form: NgForm) {
-    //TODO
-    console.log(JSON.stringify(form.value));
+    this.confRoomService.addRoom(this.chosenOrganization?.id, form.value).subscribe(
+      (response: ConferenceRoom) => {
+        this.getAllRooms();
+        console.log(`Added room with name ${response.name}`);
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error.message);
+      }
+    );
     this.closeAddForm();
   }
 
-  public openDeleteModal(id : number, name: string) {
-    this.roomNameToDelete = name;
-    this.roomIdToDelete = id;
+  public openDeleteModal(roomToDelete : ConferenceRoom) {
+    this.roomToDelete = roomToDelete;
 
     let delModal = document.getElementById('delete-window');
 
@@ -99,8 +92,7 @@ export class ConfRoomsComponent implements OnInit {
   }
 
   public closeDeleteModal() {
-    this.roomNameToDelete = null;
-    this.roomIdToDelete = null;
+    this.roomToDelete = null;
 
     let delModal = document.getElementById('delete-window');
 
@@ -110,14 +102,19 @@ export class ConfRoomsComponent implements OnInit {
   }
 
   public deleteRoom() {
-    // TODO
-    console.log(`Deleting room with id ${this.roomIdToDelete}`)
-
+    this.confRoomService.deleteRoom(this.roomToDelete?.id).subscribe(
+      (response: void) => {
+        this.getAllRooms();
+        console.log(`Deleted room with id: ${this.roomToDelete?.id}`)
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error.message);
+      }
+    );
     this.closeDeleteModal();
   }
 
   public openDateForm() {
-    // TODO
     let dateForm = document.getElementById('date-div');
 
     if (dateForm != null) {
@@ -141,14 +138,12 @@ export class ConfRoomsComponent implements OnInit {
     this.startDateToDisplay = dateForBooking.date + ' ' + dateForBooking.startTime;
     this.endDateToDisplay = dateForBooking.date + ' ' + dateForBooking.endTime;
 
+    //TODO
 
     this.getAllRooms();
     this.closeDateForm();
 
-    let roomsRequest : RoomsRequest = {start: this.startDate ,end: this.endDate, organizationName: 'name'}
-
-    //TODO
-    console.log(roomsRequest);
+    console.log(form.value)
   }
 
   public openEditForm(room : ConferenceRoom) {
@@ -173,12 +168,17 @@ export class ConfRoomsComponent implements OnInit {
     }
   }
 
-  public editRoom(id: number | undefined, form : NgForm) {
-    let room = form.value as ConferenceRoom;
-
-    //TODO
-    
-    console.log(room)
+  public editRoom(form : NgForm) {
+    this.confRoomService.editRoom(this.roomToEdit?.id, form.value).subscribe(
+      (response: ConferenceRoom) => {
+        this.getAllRooms();
+        console.log(`Updating room with id: ${response.id}`)
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error.message);
+      }
+    );
+    this.closeEditForm();
   }
 
 

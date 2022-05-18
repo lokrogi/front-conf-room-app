@@ -42,10 +42,7 @@ export class OrganizationListComponent implements OnInit {
   public assignChosenOrganization(organization : Organization) {
     this.chosenOrganization = organization;
     this.sharedService.setOrganization(organization);
-
     this.router.navigate(['/rooms']);
-    console.log(this.chosenOrganization)
-
   }
 
   public openEditOrganizationModal(organization : Organization) {
