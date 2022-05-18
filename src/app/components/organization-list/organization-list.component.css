@@ -29,5 +29,28 @@
     text-align: center;
 }
 
+.close {
+    float: right;
+}
+
+.modal {
+    background-color: white;
+    position: absolute;
+    display: none;
+    border-style: solid;
+    border: 1px;
+    padding: 25px;
+    top: 25%;
+    right: 40%;
+}
+
+.cancel-button {
+    float: right;
+}
+
+.button-container{
+    text-align: center;
+}
+
 
 
