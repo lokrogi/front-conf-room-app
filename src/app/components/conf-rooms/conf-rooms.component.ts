@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ConferenceRoom } from 'src/app/models/conf-room';
 import { DateForBooking } from 'src/app/models/dateForBooking';
+import { RoomsRequest } from 'src/app/models/room-request';
 import { ConfRoomService } from 'src/app/services/conf-room.service';
 
 @Component({
@@ -132,8 +133,10 @@ export class ConfRoomsComponent implements OnInit {
     this.getAllRooms();
     this.closeDateForm();
 
+    let roomsRequest : RoomsRequest = {start: this.startDate ,end: this.endDate, organizationName: 'name'}
+
     //TODO
-    console.log(`start: ${this.startDate}, end: ${this.endDate}`);
+    console.log(roomsRequest);
   }
 
   public openEditForm(room : ConferenceRoom) {
