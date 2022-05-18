@@ -17,14 +17,14 @@ export class OrganizationService {
   }
 
   public addOrganization(organization: Organization): Observable<Organization> {
-    return this.http.post<Organization>(`${this.baseUrl}/api/organization/add`, organization);
+    return this.http.post<Organization>(`${this.baseUrl}/api/organization/`, organization);
   }
 
   public deleteOrganization(id: number | undefined): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/api/organization/delete/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/api/organization/${id}`);
   }
 
   public editOrganization(id: number | undefined, updatedOrganization: Organization): Observable<Organization> {
-    return this.http.put<Organization>(`${this.baseUrl}/api/organization/update/${id}`, updatedOrganization);
+    return this.http.put<Organization>(`${this.baseUrl}/api/organization/${id}`, updatedOrganization);
   }
 }
