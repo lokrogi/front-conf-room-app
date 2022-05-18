@@ -1,0 +1,72 @@
+<div class="header-div">
+    <h1 class="text">Conference room reservation app</h1>
+    <div class="button-container">
+        <button mat-flat-button color="primary" (click)="openAddOrganizationModal()">Add organization</button>  
+    </div>
+</div>
+<hr>
+
+<h3 class="choose">Choose organization</h3>
+
+
+<div  class="table-div">
+    <table id="organizations">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th></th>
+        </tr>
+        <tr *ngFor="let organization of organizations">
+            <td class="column">{{organization.id}}</td>
+            <td class="column">{{organization.name}}</td>
+            <td class="column">
+                <button mat-button color="primary" (click)="assignChosenOrganization(organization)">Choose</button>
+                <button mat-button color="primary" (click)="openEditOrganizationModal(organization)" >Edit</button>
+                <button mat-button color="primary" (click)="openDeleteOrganizationModal(organization)">Delete</button>
+            </td>
+        </tr>
+      </table>
+    
+</div>
+
+<div id="edit-organization" class="modal">
+    <button mat-icon-button class="close" (click)="closeEditOrganizationModal()">
+        <mat-icon>close</mat-icon>
+    </button>
+    <form #editForm="ngForm" (ngSubmit)="editOrganization(editForm)">
+        <mat-form-field appearance="fill">
+            <mat-label>Name ({{organizationToEdit?.name}})</mat-label>
+            <input matInput  type="text" id="name" ngModel name="name">
+        </mat-form-field>
+        <br>
+        <button mat-raised-button color="primary" type="submit">Accept</button>
+    </form>
+</div>
+
+<div id="delete-organization" class="modal">
+    <button mat-icon-button class="close" (click)="closeDeleteOrganizationModal()">
+        <mat-icon>close</mat-icon>
+    </button>
+    <p>Do you want to delete organization <b>{{organizationToDelete?.name}}</b>?</p>
+    <button mat-raised-button color="primary" (click)="deleteOrganization()">Delete</button>
+    <button mat-raised-button color="primary" class="cancel-button" (click)="closeDeleteOrganizationModal()">Cancel</button>
+</div>
+
+<div id="add-organization" class="modal">
+    <button mat-icon-button class="close" (click)="closeAddOrganizationModal()">
+        <mat-icon>close</mat-icon>
+    </button>
+    <form #addForm="ngForm" (ngSubmit)="addOrganization(addForm)">
+        <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput  type="text" id="name" ngModel name="name">
+        </mat-form-field>
+        <br>
+        <button mat-raised-button color="primary" type="submit">Add</button>
+    </form>
+</div>
+
+
+  
+  
+  
