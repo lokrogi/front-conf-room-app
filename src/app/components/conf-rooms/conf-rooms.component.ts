@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ConferenceRoom } from 'src/app/models/conf-room';
 import { DateForBooking } from 'src/app/models/dateForBooking';
 import { Organization } from 'src/app/models/organization';
+import { RoomsRequest } from 'src/app/models/room-request';
 import { ConfRoomService } from 'src/app/services/conf-room.service';
 import { SharedService } from 'src/app/shared/shared.service';
 
@@ -144,8 +145,10 @@ export class ConfRoomsComponent implements OnInit {
     this.getAllRooms();
     this.closeDateForm();
 
+    let roomsRequest : RoomsRequest = {start: this.startDate ,end: this.endDate, organizationName: 'name'}
+
     //TODO
-    console.log(`start: ${this.startDate}, end: ${this.endDate}`);
+    console.log(roomsRequest);
   }
 
   public openEditForm(room : ConferenceRoom) {
