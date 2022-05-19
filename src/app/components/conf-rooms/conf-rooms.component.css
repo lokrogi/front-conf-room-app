@@ -61,7 +61,7 @@
     text-align: center;
 }
 
-.deleting-room-info {
+.info-modal {
     display: none;
     padding: 25px;
     border: 1px;

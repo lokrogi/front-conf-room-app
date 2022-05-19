@@ -17,7 +17,7 @@ export class OrganizationService {
   }
 
   public addOrganization(organization: Organization): Observable<Organization> {
-    return this.http.post<Organization>(`${this.baseUrl}/api/organization/`, organization);
+    return this.http.post<Organization>(`${this.baseUrl}/api/organization/add`, organization);
   }
 
   public deleteOrganization(id: number | undefined): Observable<void> {
