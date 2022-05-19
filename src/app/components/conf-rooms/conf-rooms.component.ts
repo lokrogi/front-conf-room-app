@@ -80,7 +80,7 @@ export class ConfRoomsComponent implements OnInit {
         console.log(`Added room with name ${response.name}`);
       },
       (error: HttpErrorResponse) => {
-        console.log(error.message);
+        this.showErrorMessage(error.error.details);
       }
     );
     this.closeAddForm();
@@ -114,7 +114,7 @@ export class ConfRoomsComponent implements OnInit {
         console.log(`Deleted room with id: ${this.roomToDelete?.id}`)
       },
       (error: HttpErrorResponse) => {
-        console.log(error.message);
+        this.showErrorMessage(error.error.details);
       }
     );
     this.closeDeleteModal();
@@ -191,7 +191,7 @@ export class ConfRoomsComponent implements OnInit {
         console.log(`Updating room with id: ${response.id}`)
       },
       (error: HttpErrorResponse) => {
-        console.log(error.message);
+        this.showErrorMessage(error.error.details);
       }
     );
     this.closeEditForm();
@@ -226,10 +226,23 @@ export class ConfRoomsComponent implements OnInit {
         console.log(`Room ${reservation.conferenceRoomDto.name} was booked from ${reservation.starting} to ${reservation.ending}`);
       },
       (error: HttpErrorResponse) => {
-        console.log(error.message);
+        this.showErrorMessage(error.error.details);
       }
     );
 
     this.closeBookingModal();
+  }
+
+  public async showErrorMessage(message : string) {
+    let errorMessage = document.getElementById('error-message');
+
+    if(errorMessage != null) {
+      errorMessage.style.display = 'block';
+      errorMessage.textContent = message;
+
+      await new Promise(resolve => setTimeout(resolve, 4000));
+
+      errorMessage.style.display = 'none';
+    }
   }
 }
