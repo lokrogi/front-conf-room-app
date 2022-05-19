@@ -1,5 +1,4 @@
-export interface RoomsRequest {
-    date: string;
-    startTime:string;
-    endTime: string;
+export interface TimePeriodRequest {
+    starting : string;
+    ending : string;
 }

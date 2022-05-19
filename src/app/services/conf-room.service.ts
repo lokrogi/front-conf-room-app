@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ConferenceRoom } from '../models/conf-room';
+import { TimePeriodRequest } from '../models/time-peroid-request';
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,9 @@ export class ConfRoomService {
 
   public deleteRoom(id: number | undefined): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/api/conferenceroom/delete/${id}`);
+  }
+
+  public getRoomsForTimePeriod(orgName : string | undefined, timePeriod: TimePeriodRequest): Observable<ConferenceRoom[]> {
+    return this.http.post<ConferenceRoom[]>(`${this.baseUrl}/api/reservation/period/${orgName}`, timePeriod);
   }
 }

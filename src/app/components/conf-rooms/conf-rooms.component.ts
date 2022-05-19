@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { ConferenceRoom } from 'src/app/models/conf-room';
 import { DateForBooking } from 'src/app/models/dateForBooking';
 import { Organization } from 'src/app/models/organization';
-import { RoomsRequest } from 'src/app/models/time-peroid-request';
 import { ConfRoomService } from 'src/app/services/conf-room.service';
 import { SharedService } from 'src/app/shared/shared.service';
 
@@ -133,17 +132,20 @@ export class ConfRoomsComponent implements OnInit {
   public getRoomsForDate(form : NgForm) {
     let dateForBooking : DateForBooking = form.value as DateForBooking;
 
-    this.startDate = dateForBooking.date + '-' + dateForBooking.startTime.split(':')[0] + '-' + dateForBooking.startTime.split(':')[1];
-    this.endDate = dateForBooking.date + '-' + dateForBooking.endTime.split(':')[0] + '-' + dateForBooking.endTime.split(':')[1];
+    this.startDate = dateForBooking.date + 'T' + dateForBooking.startTime;
+    this.endDate = dateForBooking.date + 'T' + dateForBooking.endTime;
     this.startDateToDisplay = dateForBooking.date + ' ' + dateForBooking.startTime;
     this.endDateToDisplay = dateForBooking.date + ' ' + dateForBooking.endTime;
-
-    //TODO
-
-    this.getAllRooms();
+    
+    this.confRoomService.getRoomsForTimePeriod(this.chosenOrganization?.name, {starting: this.startDate, ending: this.endDate}).subscribe(
+      (response: ConferenceRoom[]) => {
+        this.conferenceRooms = response;
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error.message);
+      }
+    )
     this.closeDateForm();
-
-    console.log(form.value)
   }
 
   public openEditForm(room : ConferenceRoom) {
