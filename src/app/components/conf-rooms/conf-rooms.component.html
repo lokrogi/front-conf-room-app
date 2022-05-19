@@ -92,20 +92,20 @@
     <form #dateForm="ngForm" (ngSubmit)="chooseDatePeriod(dateForm)">
         <mat-form-field>
             <label class="date-label">Date</label>
-            <input matInput type="date" id="date" ngModel name="date">
+            <input matInput type="date" id="date" ngModel name="date" required>
         </mat-form-field>
         <br>
         <mat-form-field>
             <label class="date-label">Start time</label>
-            <input matInput type="time" id="startTime" ngModel name="startTime">
+            <input matInput type="time" id="startTime" ngModel name="startTime" required>
         </mat-form-field>
         <br>
         <mat-form-field>
             <label class="date-label">End time</label>
-            <input matInput type="time" id="endTime" ngModel name="endTime">
+            <input matInput type="time" id="endTime" ngModel name="endTime" required>
         </mat-form-field>
         <br>
-        <button mat-raised-button color="primary" type="submit">Accept</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="dateForm.value.startTime > dateForm.value.endTime || dateForm.invalid">Accept</button>
     </form>
 </div>
 
