@@ -47,9 +47,12 @@ export class ConfRoomsComponent implements OnInit {
   }
 
   public getAllRooms(): void {
-    this.confRoomService.getAllRooms().subscribe(
-      data => {
-        this.conferenceRooms = data;
+    this.confRoomService.getAllRooms(this.chosenOrganization?.id).subscribe(
+      (response: ConferenceRoom[]) => {
+        this.conferenceRooms = response;
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error.message);
       }
     );
   }
@@ -149,7 +152,7 @@ export class ConfRoomsComponent implements OnInit {
   public getRoomsForTimePeriod() {
     const timePeriod = {starting: this.startDate, ending: this.endDate} as TimePeriodRequest
 
-    this.confRoomService.getRoomsForTimePeriod(this.chosenOrganization?.name, timePeriod).subscribe(
+    this.confRoomService.getRoomsForTimePeriod(this.chosenOrganization?.id, timePeriod).subscribe(
       (response: ConferenceRoom[]) => {
         this.conferenceRooms = response;
       },
