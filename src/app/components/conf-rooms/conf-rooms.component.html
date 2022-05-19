@@ -50,7 +50,7 @@
 
 </div>
 
-<div id="add-room-form">
+<div id="add-room-form" class="modal">
     <button mat-icon-button class="close-button" (click)="closeAddForm()">
         <mat-icon>close</mat-icon>
     </button>
@@ -79,13 +79,13 @@
     </form>
 </div>
 
-<div id="delete-window" class="info-modal">
+<div id="delete-modal" class="modal">
     <p>Do you want to delete room <b>{{roomToDelete?.name}}</b>?</p>
     <button mat-raised-button color="primary" class="del-button" (click)="deleteRoom()">Delete</button>
     <button mat-raised-button color="primary" class="cancel-button" (click)="closeDeleteModal()">Cancel</button>
 </div>
 
-<div class="date-div" id="date-div">
+<div id="date-div" class="modal">
     <button mat-icon-button class="close-button" (click)="closeDateForm()">
         <mat-icon>close</mat-icon>
     </button>
@@ -109,7 +109,7 @@
     </form>
 </div>
 
-<div id="edit-form">
+<div id="edit-form" class="modal">
     <button mat-icon-button class="close-button" (click)="closeEditForm()">
         <mat-icon>close</mat-icon>
     </button>
@@ -138,7 +138,7 @@
     </form>
 </div>
 
-<div id="booking-modal" class="info-modal">
+<div id="booking-modal" class="modal">
     <p>Do you want to book room <b>{{roomToBook?.name}}</b> from {{startDateToDisplay}} to {{endDateToDisplay}}?</p>
     <button mat-raised-button color="primary" class="del-button" (click)="bookRoom()">Book</button>
     <button mat-raised-button color="primary" class="cancel-button" (click)="closeBookingModal()">Cancel</button>

@@ -89,7 +89,7 @@ export class ConfRoomsComponent implements OnInit {
   public openDeleteModal(roomToDelete : ConferenceRoom) {
     this.roomToDelete = roomToDelete;
 
-    let delModal = document.getElementById('delete-window');
+    let delModal = document.getElementById('delete-modal');
 
     if(delModal != null) {
       delModal.style.display = 'block';
@@ -100,7 +100,7 @@ export class ConfRoomsComponent implements OnInit {
   public closeDeleteModal() {
     this.roomToDelete = null;
 
-    let delModal = document.getElementById('delete-window');
+    let delModal = document.getElementById('delete-modal');
 
     if (delModal != null) {
         delModal.style.display = 'none';
