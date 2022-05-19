@@ -71,7 +71,7 @@ export class OrganizationListComponent implements OnInit {
         this.getAllOrganizations();
       },
       (error: HttpErrorResponse) => {
-        console.log(error.message);
+        this.showErrorMessage(error.error.details);
       }
     )
     this.closeEditOrganizationModal();
@@ -103,7 +103,7 @@ export class OrganizationListComponent implements OnInit {
         this.getAllOrganizations();
       },
       (error : HttpErrorResponse) => {
-        console.log(error.message);
+        this.showErrorMessage(error.error.details);
       }
     );
     this.closeDeleteOrganizationModal();
@@ -132,11 +132,22 @@ export class OrganizationListComponent implements OnInit {
         this.getAllOrganizations();
       },
       (error : HttpErrorResponse) => {
-        console.log(error.message);
+        this.showErrorMessage(error.error.details);
       }
     );
     this.closeAddOrganizationModal();
   }
 
+  public async showErrorMessage(message : string) {
+    let errorMessage = document.getElementById('error-message');
 
+    if(errorMessage != null) {
+      errorMessage.style.display = 'block';
+      errorMessage.textContent = message;
+
+      await new Promise(resolve => setTimeout(resolve, 4000));
+
+      errorMessage.style.display = 'none';
+    }
+  }
 }
