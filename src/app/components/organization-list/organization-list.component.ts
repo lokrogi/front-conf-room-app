@@ -1,7 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Organization } from 'src/app/models/organization';
+import { OrganizationService } from 'src/app/services/organization.service';
 import { SharedService } from 'src/app/shared/shared.service';
 
 @Component({
@@ -19,26 +21,28 @@ export class OrganizationListComponent implements OnInit {
 
   organizationToDelete : Organization | null = null;
 
-  constructor(private router : Router, private sharedService : SharedService) { }
+  constructor(private router : Router, private sharedService : SharedService,
+    private organizationService : OrganizationService) { }
 
   ngOnInit(): void {
-    this.initOrganizations();
+    this.getAllOrganizations();
   }
 
-  public initOrganizations() {
-    this.organizations.push({id:1, name: 'organization 1'});
-    this.organizations.push({id:2, name: 'organization 2'});
-    this.organizations.push({id:3, name: 'organization 3'});
-    this.organizations.push({id:4, name: 'organization 4'});
+  public getAllOrganizations() {
+    this.organizationService.getAllOrganizations().subscribe(
+      (response: Organization[]) => {
+        this.organizations = response;
+      },
+      (error : HttpErrorResponse) => {
+        console.log(error.message);
+      }
+    );
   }
 
   public assignChosenOrganization(organization : Organization) {
     this.chosenOrganization = organization;
     this.sharedService.setOrganization(organization);
-
     this.router.navigate(['/rooms']);
-    console.log(this.chosenOrganization)
-
   }
 
   public openEditOrganizationModal(organization : Organization) {
@@ -61,10 +65,15 @@ export class OrganizationListComponent implements OnInit {
   }
 
   public editOrganization(form : NgForm) {
-    let result = {id : this.organizationToEdit?.id, name : form.value.name} 
-
-    //TODO
-    console.log(result);
+    this.organizationService.editOrganization(this.organizationToEdit?.id, form.value).subscribe(
+      (response: Organization) => {
+        console.log(`Updated organization with id: ${this.organizationToEdit?.id}`);
+        this.getAllOrganizations();
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error.message);
+      }
+    )
     this.closeEditOrganizationModal();
   }
 
@@ -88,9 +97,15 @@ export class OrganizationListComponent implements OnInit {
   }
 
   public deleteOrganization() {
-    //TODO
-    
-    console.log("Delete org with id " + this.organizationToDelete?.id);
+    this.organizationService.deleteOrganization(this.organizationToDelete?.id).subscribe(
+      (response: void) => {
+        console.log("Deleted organization with id " + this.organizationToDelete?.id);
+        this.getAllOrganizations();
+      },
+      (error : HttpErrorResponse) => {
+        console.log(error.message);
+      }
+    );
     this.closeDeleteOrganizationModal();
   }
 
@@ -111,9 +126,15 @@ export class OrganizationListComponent implements OnInit {
   }
 
   public addOrganization(form : NgForm) {
-    //TODO
-    
-    console.log(form.value)
+    this.organizationService.addOrganization(form.value).subscribe(
+      (response: Organization) => {
+        console.log(`Added ${response.name}`);
+        this.getAllOrganizations();
+      },
+      (error : HttpErrorResponse) => {
+        console.log(error.message);
+      }
+    );
     this.closeAddOrganizationModal();
   }
 

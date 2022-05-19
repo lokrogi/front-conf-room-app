@@ -31,7 +31,7 @@
 
         <button mat-raised-button color="primary" class="edit-button" (click)="openEditForm(room)">Edit</button>
         <div class="delete-button">
-            <button mat-fab color="delete" (click)="openDeleteModal(room.id , room.name)">
+            <button mat-fab color="delete" (click)="openDeleteModal(room)">
               <mat-icon>delete</mat-icon>
             </button>
         </div>
@@ -82,7 +82,7 @@
 </div>
 
 <div id="delete-window" class="deleting-room-info">
-    <p>Do you want to delete room <b>{{roomNameToDelete}}</b>?</p>
+    <p>Do you want to delete room <b>{{roomToDelete?.name}}</b>?</p>
     <button mat-raised-button color="primary" class="del-button" (click)="deleteRoom()">Delete</button>
     <button mat-raised-button color="primary" class="cancel-button" (click)="closeDeleteModal()">Cancel</button>
 </div>
@@ -115,7 +115,7 @@
     <button mat-icon-button class="close-button" (click)="closeEditForm()">
         <mat-icon>close</mat-icon>
     </button>
-    <form #editForm="ngForm" (ngSubmit)="editRoom(roomToEdit?.id , editForm)">
+    <form #editForm="ngForm" (ngSubmit)="editRoom(editForm)">
         <mat-form-field class="form-item" appearance="fill">
             <mat-label>Room name ({{roomToEdit?.name}})</mat-label>
             <input matInput  type="text" id="name" ngModel name="name" >
