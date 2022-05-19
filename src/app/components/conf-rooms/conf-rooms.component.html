@@ -43,14 +43,12 @@
         </div>
 
         <div *ngIf="startDateToDisplay != null">
-            <button *ngIf="room.available" mat-raised-button class="book-button">Book this room</button>
+            <button *ngIf="room.available" mat-raised-button class="book-button" (click)="openBookingModal(room)">Book this room</button>
         </div>
         
     </mat-expansion-panel>
 
 </div>
-
-
 
 <div id="add-room-form">
     <button mat-icon-button class="close-button" (click)="closeAddForm()">
@@ -81,7 +79,7 @@
     </form>
 </div>
 
-<div id="delete-window" class="deleting-room-info">
+<div id="delete-window" class="info-modal">
     <p>Do you want to delete room <b>{{roomToDelete?.name}}</b>?</p>
     <button mat-raised-button color="primary" class="del-button" (click)="deleteRoom()">Delete</button>
     <button mat-raised-button color="primary" class="cancel-button" (click)="closeDeleteModal()">Cancel</button>
@@ -91,7 +89,7 @@
     <button mat-icon-button class="close-button" (click)="closeDateForm()">
         <mat-icon>close</mat-icon>
     </button>
-    <form #dateForm="ngForm" (ngSubmit)="getRoomsForDate(dateForm)">
+    <form #dateForm="ngForm" (ngSubmit)="chooseDatePeriod(dateForm)">
         <mat-form-field>
             <label class="date-label">Date</label>
             <input matInput type="date" id="date" ngModel name="date">
@@ -140,12 +138,8 @@
     </form>
 </div>
 
-
-
-
-
-
-
-  
-  
-
+<div id="booking-modal" class="info-modal">
+    <p>Do you want to book room <b>{{roomToBook?.name}}</b> from {{startDateToDisplay}} to {{endDateToDisplay}}?</p>
+    <button mat-raised-button color="primary" class="del-button" (click)="bookRoom()">Book</button>
+    <button mat-raised-button color="primary" class="cancel-button" (click)="closeBookingModal()">Cancel</button>
+</div>

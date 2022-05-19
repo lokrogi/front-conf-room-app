@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ConferenceRoom } from '../models/conf-room';
+import { Reservation } from '../models/reservation';
 import { TimePeriodRequest } from '../models/time-peroid-request';
 
 @Injectable({
@@ -31,5 +32,9 @@ export class ConfRoomService {
 
   public getRoomsForTimePeriod(orgName : string | undefined, timePeriod: TimePeriodRequest): Observable<ConferenceRoom[]> {
     return this.http.post<ConferenceRoom[]>(`${this.baseUrl}/api/reservation/period/${orgName}`, timePeriod);
+  }
+
+  public bookRoom(reservation: Reservation): Observable<Reservation> {
+    return this.http.post<Reservation>(`${this.baseUrl}/api/reservation/add`, reservation);
   }
 }

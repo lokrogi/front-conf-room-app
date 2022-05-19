@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { ConferenceRoom } from 'src/app/models/conf-room';
 import { DateForBooking } from 'src/app/models/dateForBooking';
 import { Organization } from 'src/app/models/organization';
+import { Reservation } from 'src/app/models/reservation';
+import { TimePeriodRequest } from 'src/app/models/time-peroid-request';
 import { ConfRoomService } from 'src/app/services/conf-room.service';
 import { SharedService } from 'src/app/shared/shared.service';
 
@@ -25,6 +27,8 @@ export class ConfRoomsComponent implements OnInit {
   endDateToDisplay: string | null = null;
 
   roomToEdit: ConferenceRoom | null = null;
+
+  roomToBook: ConferenceRoom | null = null;
 
   chosenOrganization: Organization | undefined;
 
@@ -129,23 +133,30 @@ export class ConfRoomsComponent implements OnInit {
     }
   }
 
-  public getRoomsForDate(form : NgForm) {
+  public chooseDatePeriod(form : NgForm) {
     let dateForBooking : DateForBooking = form.value as DateForBooking;
 
     this.startDate = dateForBooking.date + 'T' + dateForBooking.startTime;
     this.endDate = dateForBooking.date + 'T' + dateForBooking.endTime;
     this.startDateToDisplay = dateForBooking.date + ' ' + dateForBooking.startTime;
     this.endDateToDisplay = dateForBooking.date + ' ' + dateForBooking.endTime;
+
+    this.getRoomsForTimePeriod();
     
-    this.confRoomService.getRoomsForTimePeriod(this.chosenOrganization?.name, {starting: this.startDate, ending: this.endDate}).subscribe(
+    this.closeDateForm();
+  }
+
+  public getRoomsForTimePeriod() {
+    const timePeriod = {starting: this.startDate, ending: this.endDate} as TimePeriodRequest
+
+    this.confRoomService.getRoomsForTimePeriod(this.chosenOrganization?.name, timePeriod).subscribe(
       (response: ConferenceRoom[]) => {
         this.conferenceRooms = response;
       },
       (error: HttpErrorResponse) => {
         console.log(error.message);
       }
-    )
-    this.closeDateForm();
+    );
   }
 
   public openEditForm(room : ConferenceRoom) {
@@ -183,5 +194,39 @@ export class ConfRoomsComponent implements OnInit {
     this.closeEditForm();
   }
 
+  public openBookingModal(room : ConferenceRoom) {
+    this.roomToBook = room;
 
+    let bookingModal = document.getElementById('booking-modal');
+
+    if(bookingModal != null) {
+      bookingModal.style.display = 'block';
+    }
+  }
+
+  public closeBookingModal() {
+    this.roomToBook = null;
+
+    let bookingModal = document.getElementById('booking-modal');
+
+    if(bookingModal != null) {
+      bookingModal.style.display = 'none';
+    }
+  }
+
+  public bookRoom() {
+    const reservation = {starting: this.startDate, ending: this.endDate, conferenceRoomDto: this.roomToBook} as Reservation
+
+    this.confRoomService.bookRoom(reservation).subscribe(
+      (response: Reservation) => {
+        this.getRoomsForTimePeriod();
+        console.log(`Room ${reservation.conferenceRoomDto.name} was booked from ${reservation.starting} to ${reservation.ending}`);
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error.message);
+      }
+    );
+
+    this.closeBookingModal();
+  }
 }
