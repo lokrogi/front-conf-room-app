@@ -1,0 +1,12 @@
+.footer {
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    bottom: 5px;
+}
+
+.footer-hr {
+    position: absolute;
+    width: 99%;
+    bottom: 5px;
+}

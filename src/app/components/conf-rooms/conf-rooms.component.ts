@@ -6,7 +6,8 @@ import { Router } from '@angular/router';
 import { ConferenceRoom } from 'src/app/models/conf-room';
 import { DateForBooking } from 'src/app/models/dateForBooking';
 import { Organization } from 'src/app/models/organization';
-import { RoomsRequest } from 'src/app/models/time-peroid-request';
+import { Reservation } from 'src/app/models/reservation';
+import { TimePeriodRequest } from 'src/app/models/time-peroid-request';
 import { ConfRoomService } from 'src/app/services/conf-room.service';
 import { SharedService } from 'src/app/shared/shared.service';
 
@@ -27,6 +28,8 @@ export class ConfRoomsComponent implements OnInit {
 
   roomToEdit: ConferenceRoom | null = null;
 
+  roomToBook: ConferenceRoom | null = null;
+
   chosenOrganization: Organization | undefined;
 
   constructor(private confRoomService: ConfRoomService, private sharedService : SharedService, private router: Router) { }
@@ -44,9 +47,12 @@ export class ConfRoomsComponent implements OnInit {
   }
 
   public getAllRooms(): void {
-    this.confRoomService.getAllRooms().subscribe(
-      data => {
-        this.conferenceRooms = data;
+    this.confRoomService.getAllRooms(this.chosenOrganization?.id).subscribe(
+      (response: ConferenceRoom[]) => {
+        this.conferenceRooms = response;
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error.message);
       }
     );
   }
@@ -74,7 +80,7 @@ export class ConfRoomsComponent implements OnInit {
         console.log(`Added room with name ${response.name}`);
       },
       (error: HttpErrorResponse) => {
-        console.log(error.message);
+        this.showErrorMessage(error.error.details);
       }
     );
     this.closeAddForm();
@@ -83,7 +89,7 @@ export class ConfRoomsComponent implements OnInit {
   public openDeleteModal(roomToDelete : ConferenceRoom) {
     this.roomToDelete = roomToDelete;
 
-    let delModal = document.getElementById('delete-window');
+    let delModal = document.getElementById('delete-modal');
 
     if(delModal != null) {
       delModal.style.display = 'block';
@@ -94,7 +100,7 @@ export class ConfRoomsComponent implements OnInit {
   public closeDeleteModal() {
     this.roomToDelete = null;
 
-    let delModal = document.getElementById('delete-window');
+    let delModal = document.getElementById('delete-modal');
 
     if (delModal != null) {
         delModal.style.display = 'none';
@@ -108,7 +114,7 @@ export class ConfRoomsComponent implements OnInit {
         console.log(`Deleted room with id: ${this.roomToDelete?.id}`)
       },
       (error: HttpErrorResponse) => {
-        console.log(error.message);
+        this.showErrorMessage(error.error.details);
       }
     );
     this.closeDeleteModal();
@@ -130,20 +136,30 @@ export class ConfRoomsComponent implements OnInit {
     }
   }
 
-  public getRoomsForDate(form : NgForm) {
+  public chooseDatePeriod(form : NgForm) {
     let dateForBooking : DateForBooking = form.value as DateForBooking;
 
-    this.startDate = dateForBooking.date + '-' + dateForBooking.startTime.split(':')[0] + '-' + dateForBooking.startTime.split(':')[1];
-    this.endDate = dateForBooking.date + '-' + dateForBooking.endTime.split(':')[0] + '-' + dateForBooking.endTime.split(':')[1];
+    this.startDate = dateForBooking.date + 'T' + dateForBooking.startTime;
+    this.endDate = dateForBooking.date + 'T' + dateForBooking.endTime;
     this.startDateToDisplay = dateForBooking.date + ' ' + dateForBooking.startTime;
     this.endDateToDisplay = dateForBooking.date + ' ' + dateForBooking.endTime;
 
-    //TODO
-
-    this.getAllRooms();
+    this.getRoomsForTimePeriod();
+    
     this.closeDateForm();
+  }
 
-    console.log(form.value)
+  public getRoomsForTimePeriod() {
+    const timePeriod = {starting: this.startDate, ending: this.endDate} as TimePeriodRequest
+
+    this.confRoomService.getRoomsForTimePeriod(this.chosenOrganization?.id, timePeriod).subscribe(
+      (response: ConferenceRoom[]) => {
+        this.conferenceRooms = response;
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error.message);
+      }
+    );
   }
 
   public openEditForm(room : ConferenceRoom) {
@@ -175,11 +191,58 @@ export class ConfRoomsComponent implements OnInit {
         console.log(`Updating room with id: ${response.id}`)
       },
       (error: HttpErrorResponse) => {
-        console.log(error.message);
+        this.showErrorMessage(error.error.details);
       }
     );
     this.closeEditForm();
   }
 
+  public openBookingModal(room : ConferenceRoom) {
+    this.roomToBook = room;
 
+    let bookingModal = document.getElementById('booking-modal');
+
+    if(bookingModal != null) {
+      bookingModal.style.display = 'block';
+    }
+  }
+
+  public closeBookingModal() {
+    this.roomToBook = null;
+
+    let bookingModal = document.getElementById('booking-modal');
+
+    if(bookingModal != null) {
+      bookingModal.style.display = 'none';
+    }
+  }
+
+  public bookRoom() {
+    const reservation = {starting: this.startDate, ending: this.endDate, conferenceRoomDto: this.roomToBook} as Reservation
+
+    this.confRoomService.bookRoom(reservation).subscribe(
+      (response: Reservation) => {
+        this.getRoomsForTimePeriod();
+        console.log(`Room ${reservation.conferenceRoomDto.name} was booked from ${reservation.starting} to ${reservation.ending}`);
+      },
+      (error: HttpErrorResponse) => {
+        this.showErrorMessage(error.error.details);
+      }
+    );
+
+    this.closeBookingModal();
+  }
+
+  public async showErrorMessage(message : string) {
+    let errorMessage = document.getElementById('error-message');
+
+    if(errorMessage != null) {
+      errorMessage.style.display = 'block';
+      errorMessage.textContent = message;
+
+      await new Promise(resolve => setTimeout(resolve, 4000));
+
+      errorMessage.style.display = 'none';
+    }
+  }
 }

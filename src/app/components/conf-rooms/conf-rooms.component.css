@@ -38,7 +38,7 @@
 .edit-button {
     position: absolute;
     right: 6%;
-    top: 37%
+    top: 90px;
 }
 
 .mat-delete {
@@ -46,45 +46,12 @@
     color: white;
 }
 
-#add-room-form {
-    display: none;
-    padding: 10px;
-    border: 1px;
-    border-style: solid;
-    background-color: white;
-    position: absolute;
-    right: 43%;
-    top: 17%;
-}
-
 .toolbar {
     text-align: center;
 }
 
-.deleting-room-info {
-    display: none;
-    padding: 25px;
-    border: 1px;
-    border-style: solid;
-    background-color: white;
-    position: absolute;
-    top: 30%;
-    left: 41%;
-}
-
 .cancel-button {
     float: right;
-}
-
-.date-div {
-    border: 1px;
-    border-style: solid;
-    display: none;
-    position: absolute;
-    background-color: white;
-    padding: 25px;
-    top: 15%;
-    right: 25%;
 }
 
 .date-label {
@@ -99,15 +66,25 @@
     text-align: center;
 }
 
-#edit-form {
+.modal {
     display: none;
-    position: absolute;
-    background-color: white;
+    padding: 25px;
     border: 1px;
     border-style: solid;
-    top: 30%;
-    left: 30%;
-    padding: 25px;
+    background-color: white;
+    position: absolute;
+    top: 19%;
+    left: 43%;
+}
+
+#delete-modal {
+    top: 25%;
+    left: 41%;
+}
+
+#booking-modal {
+    top: 25%;
+    left: 33%;
 }
 
 
