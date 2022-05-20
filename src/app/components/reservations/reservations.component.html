@@ -1,0 +1,48 @@
+<div class="header-div">
+    <h1 class="text" style="font-family: Verdana">Reservations</h1>
+</div>
+
+<hr>
+
+<div  class="table-div">
+  <table id="reservations">
+      <tr>
+          <th>Id</th>
+          <th>Conference Room Name</th>
+          <th>FROM: </th>
+          <th>TO: </th>
+          <th></th>
+      </tr>
+      <tr *ngFor="let reservation of reservations">
+          <td class="column">{{reservation.id}</td>
+          <td class="column">{{reservation.conferenceRoomDto.name}}</td>
+          <td class="column">{{reservation.starting}}</td>
+          <td class="column">{{reservation.ending}}</td>
+          <td class="column">
+              <button mat-button color="primary" (click)="openDeleteReservationModal(reservation)">Delete</button>
+          </td>
+      </tr>
+    </table>
+</div>
+
+<!-- <div id="delete-reservation" class="modal">
+  <button mat-icon-button class="close" (click)="closeDeleteReservationModal()">
+      <mat-icon>close</mat-icon>
+  </button>
+  <p>Do you want to delete reservation <b>{{reservationToDelete?.id}}</b> for the room {{reservationToDelete?.conferenceRoom?.name}}?</p>
+  <button mat-raised-button color="primary" (click)="deleteReservation()">Delete</button>
+  <button mat-raised-button color="primary" class="cancel-button" (click)="closeDeleteReservationModal()">Cancel</button>
+</div> -->
+
+
+
+
+
+
+
+
+
+  
+  
+
+
