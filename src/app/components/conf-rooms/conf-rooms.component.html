@@ -59,25 +59,25 @@
     <form #addForm="ngForm" (ngSubmit)="addRoom(addForm)">
         <mat-form-field class="form-item" appearance="fill">
           <mat-label>Room name</mat-label>
-          <input matInput  type="text" id="name" ngModel name="name">
+          <input matInput  type="text" id="name" ngModel="" name="name" required>
         </mat-form-field>
         <br>
         <mat-form-field appearance="fill">
             <mat-label>Level</mat-label>
-            <input matInput  type="number" id="level" ngModel name="level" >
+            <input matInput  type="number" id="level" ngModel="" name="level" required>
         </mat-form-field>
         <br>
         <mat-form-field appearance="fill">
             <mat-label>Sitting places</mat-label>
-            <input matInput  type="number" id="sittingPlaces" ngModel name="sittingPlaces">
+            <input matInput  type="number" id="sittingPlaces" ngModel="" name="sittingPlaces">
         </mat-form-field>
         <br>
         <mat-form-field appearance="fill">
           <mat-label>Standing places</mat-label>
-          <input matInput  type="number" id="standingPlaces" ngModel name="standingPlaces">
+          <input matInput  type="number" id="standingPlaces" ngModel="" name="standingPlaces">
       </mat-form-field>
       <br>
-      <button mat-raised-button color="primary" type="submit">Add</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="addForm.invalid">Add</button>
     </form>
 </div>
 
@@ -117,26 +117,26 @@
     </button>
     <form #editForm="ngForm" (ngSubmit)="editRoom(editForm)">
         <mat-form-field class="form-item" appearance="fill">
-            <mat-label>Room name ({{roomToEdit?.name}})</mat-label>
-            <input matInput  type="text" id="name" ngModel name="name" >
+            <mat-label>Room name</mat-label>
+            <input matInput  type="text" id="name" ngModel="{{roomToEdit?.name}}" name="name" required>
           </mat-form-field>
           <br>
           <mat-form-field appearance="fill">
-              <mat-label>Level ({{roomToEdit?.level}})</mat-label>
-              <input matInput  type="number" id="level" ngModel name="level" >
+              <mat-label>Level</mat-label>
+              <input matInput  type="number" id="level" ngModel="{{roomToEdit?.level}}" name="level" required>
           </mat-form-field>
           <br>
           <mat-form-field appearance="fill">
-              <mat-label>Sitting places ({{roomToEdit?.sittingPlaces}})</mat-label>
-              <input matInput  type="number" id="sittingPlaces" ngModel name="sittingPlaces">
+              <mat-label>Sitting places</mat-label>
+              <input matInput  type="number" id="sittingPlaces" ngModel="{{roomToEdit?.sittingPlaces}}" name="sittingPlaces">
           </mat-form-field>
           <br>
           <mat-form-field appearance="fill">
-            <mat-label>Standing places ({{roomToEdit?.standingPlaces}})</mat-label>
-            <input matInput  type="number" id="standingPlaces" ngModel name="standingPlaces">
+            <mat-label>Standing places</mat-label>
+            <input matInput  type="number" id="standingPlaces" ngModel="{{roomToEdit?.standingPlaces}}" name="standingPlaces">
         </mat-form-field>
         <br>
-        <button mat-raised-button color="primary" type="submit">Accept</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="editForm.invalid">Accept</button>
     </form>
 </div>
 
