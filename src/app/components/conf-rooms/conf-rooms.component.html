@@ -10,6 +10,8 @@
 <h3 *ngIf="startDateToDisplay != null" class="date-info">Conference rooms for date: from {{startDateToDisplay}} to {{endDateToDisplay}}</h3>
 <h3 class="date-info" *ngIf="startDateToDisplay == null">All rooms</h3>
 
+<div id="error-message"></div>
+
 <div *ngFor="let room of conferenceRooms; let i = index">
 
     <mat-expansion-panel class="room-content" >

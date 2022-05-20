@@ -18,3 +18,13 @@ body {
     padding-top: 5px;
     padding-bottom: 5px;
 }
+
+#error-message {
+    display: none;
+    text-align: center;
+    background-color: rgb(223, 82, 82);
+    font-weight: bold;
+    padding: 5px;
+    border: 3px solid rgb(190, 24, 24);
+    border-radius: 12.5px;
+}
