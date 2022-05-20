@@ -36,11 +36,11 @@
     </button>
     <form #editForm="ngForm" (ngSubmit)="editOrganization(editForm)">
         <mat-form-field appearance="fill">
-            <mat-label>Name ({{organizationToEdit?.name}})</mat-label>
-            <input matInput  type="text" id="name" ngModel name="name">
+            <mat-label>Name</mat-label>
+            <input matInput  type="text" id="name" ngModel="{{organizationToEdit?.name}}" name="name" required>
         </mat-form-field>
         <br>
-        <button mat-raised-button color="primary" type="submit">Accept</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="editForm.invalid">Accept</button>
     </form>
 </div>
 
@@ -60,10 +60,10 @@
     <form #addForm="ngForm" (ngSubmit)="addOrganization(addForm)">
         <mat-form-field appearance="fill">
             <mat-label>Name</mat-label>
-            <input matInput id="name" ngModel name="name">
+            <input matInput id="name" ngModel="" name="name" required>
         </mat-form-field>
         <br>
-        <button mat-raised-button color="primary" type="submit">Add</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="addForm.invalid">Add</button>
     </form>
 </div>
 
