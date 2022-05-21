@@ -78,5 +78,9 @@ export class ReservationsComponent implements OnInit {
     this.closeDeleteReservationModal();
   }
 
+  public redirectToConfRooms() {
+    this.router.navigate(['/rooms']);
+  }
+
 }
 

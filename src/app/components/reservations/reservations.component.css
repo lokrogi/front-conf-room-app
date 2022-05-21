@@ -56,5 +56,11 @@
     text-align: center;
 }
 
+.back-button {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    color: white;
+}
 
 
