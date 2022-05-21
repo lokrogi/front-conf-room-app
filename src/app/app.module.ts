@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { ConfRoomsComponent } from './components/conf-rooms/conf-rooms.component';
+import { ReservationsComponent } from './components/reservations/reservations.component';
 import { OrganizationListComponent } from './components/organization-list/organization-list.component';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -25,7 +26,8 @@ import {MatDividerModule} from '@angular/material/divider';
   declarations: [
     AppComponent,
     ConfRoomsComponent,
-    OrganizationListComponent,
+    ReservationsComponent,
+    OrganizationListComponent
   ],
   imports: [
     BrowserModule,

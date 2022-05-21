@@ -1,5 +1,5 @@
 <div class="header-div">
-    <h1 class="text" style="font-family: Verdana">Reservations</h1>
+    <h1 class="text" style="font-family: Verdana">{{chosenOrganization?.name}} reservations</h1>
 </div>
 
 <hr>
@@ -25,14 +25,14 @@
     </table>
 </div>
 
-<!-- <div id="delete-reservation" class="modal">
+<div id="delete-reservation" class="modal">
   <button mat-icon-button class="close" (click)="closeDeleteReservationModal()">
       <mat-icon>close</mat-icon>
   </button>
-  <p>Do you want to delete reservation <b>{{reservationToDelete?.id}}</b> for the room {{reservationToDelete?.conferenceRoom?.name}}?</p>
+  <p>Do you want to delete reservation <b>{{reservationToDelete?.id}}</b> for the room {{reservationToDelete?.conferenceRoomDto?.name}}?</p>
   <button mat-raised-button color="primary" (click)="deleteReservation()">Delete</button>
   <button mat-raised-button color="primary" class="cancel-button" (click)="closeDeleteReservationModal()">Cancel</button>
-</div> -->
+</div>
 
 
 
