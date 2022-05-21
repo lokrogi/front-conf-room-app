@@ -245,4 +245,8 @@ export class ConfRoomsComponent implements OnInit {
       errorMessage.style.display = 'none';
     }
   }
+
+  public redirectToReservations() {
+    this.router.navigate(['/reservations']);
+  }
 }

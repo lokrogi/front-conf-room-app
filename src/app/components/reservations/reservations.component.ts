@@ -25,7 +25,7 @@ export class ReservationsComponent implements OnInit {
 
   ngOnInit(): void {
     this.chosenOrganization = this.sharedService.getOrganization();
-    //this.redirectIfOrganizationUndefined();
+    this.redirectIfOrganizationUndefined();
     this.getAllReservationsForSpecificOrganization();
    }
 

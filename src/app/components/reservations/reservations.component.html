@@ -1,5 +1,5 @@
 <div class="header-div">
-    <h1 class="text" style="font-family: Verdana">{{chosenOrganization?.name}} reservations</h1>
+    <h1 class="text">{{chosenOrganization?.name}} reservations</h1>
 </div>
 
 <hr>
@@ -7,14 +7,12 @@
 <div  class="table-div">
   <table id="reservations">
       <tr>
-          <th>Id</th>
           <th>Conference Room Name</th>
-          <th>FROM: </th>
-          <th>TO: </th>
+          <th>From: </th>
+          <th>To: </th>
           <th></th>
       </tr>
       <tr *ngFor="let reservation of reservations">
-          <td class="column">{{reservation.id}</td>
           <td class="column">{{reservation.conferenceRoomDto.name}}</td>
           <td class="column">{{reservation.starting}}</td>
           <td class="column">{{reservation.ending}}</td>
