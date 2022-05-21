@@ -23,7 +23,7 @@
           <td class="column">{{reservation.starting.split('T')[0]}} {{reservation.starting.split('T')[1]}}</td>
           <td class="column">{{reservation.ending.split('T')[0]}} {{reservation.ending.split('T')[1]}}</td>
           <td class="column">
-              <button mat-button color="primary" (click)="openDeleteReservationModal(reservation)">Delete</button>
+              <button mat-button (click)="openDeleteReservationModal(reservation)" class="delete-button">Delete</button>
           </td>
       </tr>
     </table>
