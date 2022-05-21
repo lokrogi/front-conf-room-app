@@ -13,8 +13,8 @@ export class ReservationService {
 
   constructor(private http: HttpClient) { }
 
-  public getAllReservations() : Observable<Reservation[]> {
-    return this.http.get<Reservation[]>(`${this.reservationBaseUrl}/reservation/all`);
+  public getAllReservationsForSpecificOrganization(organizationId: number | undefined) : Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(`${this.reservationBaseUrl}/reservation/all/${organizationId}`);
   }
 
   public deleteReservation(id: number | undefined): Observable<void> {
