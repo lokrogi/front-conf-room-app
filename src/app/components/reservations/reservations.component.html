@@ -1,15 +1,17 @@
 <div class="header-div">
-    <h1 class="text">{{chosenOrganization?.name}} reservations</h1>
+    <h1 class="text">{{chosenOrganization?.name}}</h1>
 </div>
 
 <hr>
+
+<h3 class="reservations">Reservations</h3>
 
 <div  class="table-div">
   <table id="reservations">
       <tr>
           <th>Conference Room Name</th>
-          <th>From: </th>
-          <th>To: </th>
+          <th>From </th>
+          <th>To </th>
           <th></th>
       </tr>
       <tr *ngFor="let reservation of reservations">

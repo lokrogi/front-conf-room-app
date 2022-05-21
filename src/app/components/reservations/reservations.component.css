@@ -1,3 +1,8 @@
+.reservations {
+    text-align: center;
+    font-size: 25px;
+}
+
 .choose {
     text-align: center;
     font-size: 25px;
@@ -18,7 +23,6 @@
 
 #reservations td, #reservations th {
     border: 1px solid rgb(0, 0, 0);
-    padding: 8px;
 }
 
 #reservations tr:nth-child(even){
