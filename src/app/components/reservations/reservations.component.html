@@ -20,8 +20,8 @@
       </tr>
       <tr *ngFor="let reservation of reservations">
           <td class="column">{{reservation.conferenceRoomDto.name}}</td>
-          <td class="column">{{reservation.starting}}</td>
-          <td class="column">{{reservation.ending}}</td>
+          <td class="column">{{reservation.starting.split('T')[0]}} {{reservation.starting.split('T')[1]}}</td>
+          <td class="column">{{reservation.ending.split('T')[0]}} {{reservation.ending.split('T')[1]}}</td>
           <td class="column">
               <button mat-button color="primary" (click)="openDeleteReservationModal(reservation)">Delete</button>
           </td>
