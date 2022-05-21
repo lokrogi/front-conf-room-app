@@ -249,4 +249,8 @@ export class ConfRoomsComponent implements OnInit {
   public redirectToReservations() {
     this.router.navigate(['/reservations']);
   }
+
+  public redirectToOrganizations() {
+    this.router.navigate(['']);
+  }
 }

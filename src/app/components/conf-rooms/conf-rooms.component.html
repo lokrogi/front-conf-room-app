@@ -2,6 +2,9 @@
     <h1 class="text">{{chosenOrganization?.name}}</h1>
 </div>
 <div class="toolbar">
+    <button mat-icon-button class="back-button" (click)="redirectToOrganizations()">
+        <mat-icon>keyboard_backspace</mat-icon>
+    </button>
     <button mat-flat-button color="primary"  (click)="openAddForm()">Add conference room</button>    
     <button mat-flat-button color="primary" (click)="openDateForm()">Check availability</button>
     <button mat-flat-button color="primary" (click)="redirectToReservations()">Reservations</button>
