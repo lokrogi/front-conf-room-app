@@ -12,7 +12,7 @@
 
 <hr>
 <h3 *ngIf="startDateToDisplay != null" class="date-info">Conference rooms for date: from {{startDateToDisplay}} to {{endDateToDisplay}}</h3>
-<h3 class="date-info" *ngIf="startDateToDisplay == null">All rooms</h3>
+<h3 class="date-info" *ngIf="startDateToDisplay == null">All conference rooms</h3>
 
 <div id="error-message"></div>
 
@@ -145,7 +145,7 @@
 </div>
 
 <div id="booking-modal" class="modal">
-    <p>Do you want to book room <b>{{roomToBook?.name}}</b> from {{startDateToDisplay}} to {{endDateToDisplay}}?</p>
+    <p>Do you want to book <b>{{roomToBook?.name}}</b> from <b>{{startDateToDisplay}}</b> to <b>{{endDateToDisplay}}</b>?</p>
     <button mat-raised-button color="primary" class="del-button" (click)="bookRoom()">Book</button>
     <button mat-raised-button color="primary" class="cancel-button" (click)="closeBookingModal()">Cancel</button>
 </div>
