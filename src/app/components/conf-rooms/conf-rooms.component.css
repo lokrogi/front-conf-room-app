@@ -24,6 +24,7 @@
 
 .book-button {
     float: right;
+    right: -5px;
 }
 
 .close-button {
@@ -32,12 +33,13 @@
 
 .delete-button {
     position: absolute;
-    right: 1.5%;
+    top: 88px;
+    right: 20px;
 }
 
 .edit-button {
     position: absolute;
-    right: 6%;
+    right: 80px;
     top: 90px;
 }
 

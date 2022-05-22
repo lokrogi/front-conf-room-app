@@ -12,7 +12,7 @@
 
 <hr>
 <h3 *ngIf="startDateToDisplay != null" class="date-info">Conference rooms for date: from {{startDateToDisplay}} to {{endDateToDisplay}}</h3>
-<h3 class="date-info" *ngIf="startDateToDisplay == null">All rooms</h3>
+<h3 class="date-info" *ngIf="startDateToDisplay == null">All conference rooms</h3>
 
 <div id="error-message"></div>
 
@@ -35,9 +35,9 @@
           </mat-expansion-panel-header>
           <hr>
 
-        <button mat-raised-button color="primary" class="edit-button" (click)="openEditForm(room)">Edit</button>
+        <button mat-flat-button color="primary" class="edit-button" (click)="openEditForm(room)">Edit</button>
         <div class="delete-button">
-            <button mat-fab color="delete" (click)="openDeleteModal(room)">
+            <button mat-icon-button color="delete" (click)="openDeleteModal(room)">
               <mat-icon>delete</mat-icon>
             </button>
         </div>
@@ -49,7 +49,7 @@
         </div>
 
         <div *ngIf="startDateToDisplay != null">
-            <button *ngIf="room.available" mat-raised-button class="book-button" (click)="openBookingModal(room)">Book this room</button>
+            <button *ngIf="room.available" mat-raised-button color="primary" class="book-button" (click)="openBookingModal(room)">Book this room</button>
         </div>
         
     </mat-expansion-panel>
@@ -145,7 +145,7 @@
 </div>
 
 <div id="booking-modal" class="modal">
-    <p>Do you want to book room <b>{{roomToBook?.name}}</b> from {{startDateToDisplay}} to {{endDateToDisplay}}?</p>
+    <p>Do you want to book <b>{{roomToBook?.name}}</b> from <b>{{startDateToDisplay}}</b> to <b>{{endDateToDisplay}}</b>?</p>
     <button mat-raised-button color="primary" class="del-button" (click)="bookRoom()">Book</button>
     <button mat-raised-button color="primary" class="cancel-button" (click)="closeBookingModal()">Cancel</button>
 </div>

@@ -30,10 +30,11 @@
 </div>
 
 <div id="delete-reservation" class="modal">
-  <button mat-icon-button class="close" (click)="closeDeleteReservationModal()">
-      <mat-icon>close</mat-icon>
-  </button>
-  <p>Do you want to delete reservation <b>{{reservationToDelete?.id}}</b> for the room {{reservationToDelete?.conferenceRoomDto?.name}}?</p>
+  <div *ngIf="reservationToDelete">
+      <p>Do you want to delete reservation for <b>{{reservationToDelete?.conferenceRoomDto?.name}}</b></p> 
+      <p>from <b>{{reservationToDelete.starting.split('T')[0]}} {{reservationToDelete.starting.split('T')[1]}}</b></p> 
+      <p>to <b>{{reservationToDelete.ending.split('T')[0]}} {{reservationToDelete.ending.split('T')[1]}}</b>?</p>
+  </div>
   <button mat-raised-button color="primary" (click)="deleteReservation()">Delete</button>
   <button mat-raised-button color="primary" class="cancel-button" (click)="closeDeleteReservationModal()">Cancel</button>
 </div>

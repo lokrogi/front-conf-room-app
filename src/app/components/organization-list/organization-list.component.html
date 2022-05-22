@@ -13,12 +13,12 @@
 <div  class="table-div">
     <table id="organizations">
         <tr>
-            <th>Id</th>
+            <th>No.</th>
             <th>Name</th>
             <th></th>
         </tr>
-        <tr *ngFor="let organization of organizations">
-            <td class="column">{{organization.id}}</td>
+        <tr *ngFor="let organization of organizations; let i = index">
+            <td class="column">{{i + 1}}</td>
             <td class="column">{{organization.name}}</td>
             <td class="column">
                 <button mat-raised-button color="primary" (click)="assignChosenOrganization(organization)">Choose</button>
