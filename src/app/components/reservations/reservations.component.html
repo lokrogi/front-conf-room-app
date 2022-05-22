@@ -1,25 +1,29 @@
 <div class="header-div">
-    <h1 class="text" style="font-family: Verdana">{{chosenOrganization?.name}} reservations</h1>
+    <h1 class="text">{{chosenOrganization?.name}}</h1>
 </div>
 
+<button mat-icon-button class="back-button" (click)="redirectToConfRooms()">
+    <mat-icon>keyboard_backspace</mat-icon>
+</button>
+
 <hr>
+
+<h3 class="reservations">Reservations</h3>
 
 <div  class="table-div">
   <table id="reservations">
       <tr>
-          <th>Id</th>
           <th>Conference Room Name</th>
-          <th>FROM: </th>
-          <th>TO: </th>
+          <th>From </th>
+          <th>To </th>
           <th></th>
       </tr>
       <tr *ngFor="let reservation of reservations">
-          <td class="column">{{reservation.id}</td>
           <td class="column">{{reservation.conferenceRoomDto.name}}</td>
-          <td class="column">{{reservation.starting}}</td>
-          <td class="column">{{reservation.ending}}</td>
+          <td class="column">{{reservation.starting.split('T')[0]}} {{reservation.starting.split('T')[1]}}</td>
+          <td class="column">{{reservation.ending.split('T')[0]}} {{reservation.ending.split('T')[1]}}</td>
           <td class="column">
-              <button mat-button color="primary" (click)="openDeleteReservationModal(reservation)">Delete</button>
+              <button mat-button (click)="openDeleteReservationModal(reservation)" class="delete-button">Delete</button>
           </td>
       </tr>
     </table>

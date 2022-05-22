@@ -87,6 +87,9 @@
     left: 33%;
 }
 
-
-
-
+.back-button {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    color: white;
+}

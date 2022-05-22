@@ -9,7 +9,7 @@ export class SharedService {
 
   constructor() { }
 
-  setOrganization(organization: Organization) {
+  setOrganization(organization: Organization | undefined) {
     this.organization = organization;
   }
 

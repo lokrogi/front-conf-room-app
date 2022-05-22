@@ -21,9 +21,9 @@
             <td class="column">{{organization.id}}</td>
             <td class="column">{{organization.name}}</td>
             <td class="column">
-                <button mat-button color="primary" (click)="assignChosenOrganization(organization)">Choose</button>
-                <button mat-button color="primary" (click)="openEditOrganizationModal(organization)" >Edit</button>
-                <button mat-button color="primary" (click)="openDeleteOrganizationModal(organization)">Delete</button>
+                <button mat-raised-button color="primary" (click)="assignChosenOrganization(organization)">Choose</button>
+                <button mat-button color="primary" class="edit-org-button" (click)="openEditOrganizationModal(organization)" >Edit</button>
+                <button mat-button class="delete-org-button" (click)="openDeleteOrganizationModal(organization)">Delete</button>
             </td>
         </tr>
       </table>
